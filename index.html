@@ -1,22 +1,62 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Cythia's Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
+    <!-- <script src="./core/global.js"></script> -->
+    <script src="core/router.js"></script>
+    <style>
+        #slider {
+            width: 30%;
+            height: 100vh;
+            /* background: #cdcd00; */
+            float: left;
+            display: table;
+        }
+
+        #main {
+            float: left;
+            width: 70%;
+            height: 90vh;
+        }
+    </style>
 </head>
+
 <body>
-    <div class="header">
+    <div id="slider">
         侧边栏
     </div>
-    <div class="main">
+    <div id="main">
         主体
     </div>
-    <div class="footer">
+    <div id="footer">
         底部
     </div>
+    <div id="router-view">默认</div>
+    <script src="./common/slider.js"></script>
+    <script>
+        // document.open();
+        // document.write("<script language='javascript' src='./js/router.js'><\/script>");
+        const myRoutes = [{
+                path: '/index',
+                filename: './pages/index.html'
+            },
+            {
+                path: '/list',
+                filename: './pages/list.html'
+            },
+            {
+                path: '/detail',
+                filename: './pages/detail.html'
+            }
+        ]
+        let el = document.getElementById('router-view');
+        let router = new SPARouter(el, myRoutes, 'hash');
+    </script>
 </body>
+
 </html>
