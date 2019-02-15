@@ -1,6 +1,28 @@
+<style>
+    #article-list li {
+        height: 100px;
+        background: #ddd;
+        margin: 10px 0;
+        line-height: 100px;
+        list-style: none;
+    }
+</style>
 <template>
-    list
+    <ul id="article-list"></ul>
 </template>
 <script>
-    console.log('11');
+    (function outerFunction() {
+        let arr = ['homebrew的安装使用', '元素的垂直水平居中方案', 'webpack浅谈'];
+        let liDiv = document.createElement('div');
+        for (let i = 0; i < arr.length; i++) {
+            let aLi = document.createElement('a');
+            aLi.href = "#/detail?id=1";
+            let artLi = document.createElement('li');
+            aLi.innerHTML = arr[i];
+            artLi.appendChild(aLi);
+            liDiv.appendChild(artLi);
+        }
+        let ulDiv = document.getElementById('article-list');
+        ulDiv.innerHTML = liDiv.innerHTML;
+    })()
 </script>

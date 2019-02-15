@@ -1,6 +1,16 @@
+<style>
+    h3 {
+        margin-top: 100px;
+    }
+</style>
 <template>
-    detail
+    <h3>homebrew的安装使用</h3>
 </template>
 <script>
-    console.log('22');
+    (function outerFunction() {
+        let count = 2;
+        if (router.query) {
+            console.log('id', router.query.id);
+        }
+    })()
 </script>

@@ -10,6 +10,8 @@ class SPARouter {
         this.el = el;
         this.mode = mode;
         this.currentRoute = {};
+        this.path = null;
+        this.query = null;
         this.initRouters(routers);
         this.initEvent();
     }
@@ -30,6 +32,8 @@ class SPARouter {
     }
     routeUpload() {
         let currentLocation = this.getRoute();
+        this.query = currentLocation.query;
+        this.path = currentLocation.path;
         this.currentRoute.query = currentLocation.query;
         this.routers.map((item) => {
             if (item.path === currentLocation.path) {
@@ -64,7 +68,6 @@ class SPARouter {
     loadModule() {
         let _this = this;
         if (this.currentRoute.filename) {
-            let bodyEl = document.getElementsByTagName('body')[0];
             let xmlRequest = new XMLHttpRequest();
             xmlRequest.open('GET', this.currentRoute.filename);
             xmlRequest.responseType = 'document';
@@ -73,20 +76,32 @@ class SPARouter {
                 if (xmlRequest.readyState === 4) {
                     if (xmlRequest.status === 200 || xmlRequest.status === 304) {
                         // 删除上个页面的js脚本
-                        let oldS = document.getElementById('appendScript')
+                        let oldS = document.getElementById('appendScript');
+                        let oldSt = document.getElementById('appendStyle')
                         if (oldS) {
                             oldS.parentNode.removeChild(oldS);
                         }
-                        let s = xmlRequest.response.getElementsByTagName('script');
+                        if (oldSt) {
+                            oldSt.parentNode.removeChild(oldSt);
+                        }
+                        let sc = xmlRequest.response.getElementsByTagName('script');
                         let t = xmlRequest.response.getElementsByTagName('template');
+                        let st = xmlRequest.response.getElementsByTagName('style');
                         if (t.length > 0) {
                             _this.el.innerHTML = t[0].innerHTML;
                         }
-                        if (s.length > 0) {
+                        if (sc.length > 0) {
                             let newS = document.createElement('script');
                             newS.id = 'appendScript';
-                            newS.innerHTML = s[0].innerHTML;
+                            newS.innerHTML = sc[0].innerHTML;
                             document.body.appendChild(newS);
+                        }
+                        if (st.length > 0) {
+                            let headTag = document.getElementsByTagName('head')[0];
+                            let newSt = document.createElement('style');
+                            newSt.id = "appendStyle";
+                            newSt.appendChild(document.createTextNode(st[0].innerHTML));
+                            headTag.appendChild(newSt);
                         }
                     }
                 }

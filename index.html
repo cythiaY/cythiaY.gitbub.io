@@ -6,10 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Cythia's Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
+    <link rel="icon" href="https://upload.jianshu.io/users/upload_avatars/6967071/d0281db2-88fd-4a93-8b14-c89f0649c718.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120">
     <!-- <script src="./core/global.js"></script> -->
     <script src="core/router.js"></script>
     <style>
+        a {
+            text-decoration: none;
+            color: #333;
+        }
+
         #slider {
             width: 30%;
             height: 100vh;
@@ -18,34 +23,28 @@
             display: table;
         }
 
-        #main {
+        #router-view {
             float: left;
             width: 70%;
             height: 90vh;
         }
     </style>
+    <style id="appendStyle"></style>
 </head>
 
 <body>
     <div id="slider">
         侧边栏
     </div>
-    <div id="main">
+    <div id="router-view">
         主体
     </div>
     <div id="footer">
         底部
     </div>
-    <div id="router-view">默认</div>
     <script src="./common/slider.js"></script>
     <script>
-        // document.open();
-        // document.write("<script language='javascript' src='./js/router.js'><\/script>");
         const myRoutes = [{
-                path: '/index',
-                filename: './pages/index.html'
-            },
-            {
                 path: '/list',
                 filename: './pages/list.html'
             },
